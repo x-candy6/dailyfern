@@ -6,7 +6,7 @@ import { siteConfig } from '@/lib/config';
 export const revalidate = 300;
 
 function getCategoryColor(_category: string): string {
-  return '#16a34a';
+  return '#2D6A4F';
 }
 
 export async function generateStaticParams() {
@@ -20,9 +20,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
   if (!category) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-zinc-50">
+      <div className="min-h-screen flex items-center justify-center bg-[#F9F5EC]">
         <div className="text-center">
-          <h1 className="font-display font-black text-4xl mb-4">Category Not Found</h1>
+          <h1 className="text-4xl mb-4" style={{ fontFamily: 'var(--font-lora)', fontWeight: 700 }}>Category Not Found</h1>
           <Link href="/" className="link-accent">Back to home</Link>
         </div>
       </div>
@@ -37,7 +37,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
   return (
     <>
-      <section className="relative min-h-[40vh] flex flex-col justify-end overflow-hidden bg-[#0B0C10]">
+      <section className="relative min-h-[40vh] flex flex-col justify-end overflow-hidden bg-[#1B4332]">
         <div className="relative z-10 px-6 lg:px-12 py-16 lg:py-24">
           <div className="max-w-7xl mx-auto">
             <nav className="breadcrumb mb-6">
@@ -45,10 +45,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
               <span className="breadcrumb-separator text-white/30">/</span>
               <span className="text-white/80">{category.label}</span>
             </nav>
-            <h1 className="font-display font-black text-6xl lg:text-8xl tracking-tight leading-none mb-4" style={{ color }}>
+            <h1 className="text-6xl lg:text-8xl tracking-tight leading-none mb-4" style={{ fontFamily: 'var(--font-lora)', fontStyle: 'italic', fontWeight: 700, color }}>
               {category.label}
             </h1>
-            <p className="text-white/50 text-lg max-w-2xl">
+            <p className="text-white/60 text-lg max-w-2xl">
               Latest stories, analysis, and insights from the world of {category.label.toLowerCase()}.
             </p>
           </div>
@@ -57,7 +57,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
       </section>
 
       {subCategories.length > 0 && (
-        <section className="py-6 bg-zinc-50 border-b border-black/5">
+        <section className="py-6 bg-[#F9F5EC] border-b border-black/5">
           <div className="px-6 lg:px-12">
             <div className="max-w-7xl mx-auto">
               <div className="flex flex-wrap gap-2">
@@ -71,7 +71,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         </section>
       )}
 
-      <section className="py-12 lg:py-16 bg-zinc-50">
+      <section className="py-12 lg:py-16 bg-[#F9F5EC]">
         <div className="px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             {articleCards.length > 0 ? (
@@ -79,12 +79,11 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
                 {articleCards.map((card) => (
                   <Link key={card.article.id} href={card.href} className="group block">
                     <article
-                      className="bg-white rounded-lg border border-black/5 p-5 lg:p-6 border-l-4 transition-shadow hover:shadow-md"
-                      style={{ borderLeftColor: color }}
+                      className="bg-[#FDFAF3] border border-[#C8DFC8] border-t-2 border-t-[#2D6A4F] p-5 lg:p-6 transition-all hover:border-t-[#1B4332]"
                     >
                       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3">
                         <div className="flex-1 min-w-0">
-                          <h2 className="font-display font-bold text-lg lg:text-xl leading-tight mb-2 group-hover:text-[#16a34a] transition-colors">
+                          <h2 className="text-lg lg:text-xl leading-tight mb-2 group-hover:text-[#2D6A4F] transition-colors" style={{ fontFamily: 'var(--font-lora)', fontWeight: 600 }}>
                             {card.article.title}
                           </h2>
                           <p className="text-[#6B7280] text-sm leading-relaxed mb-3 line-clamp-2">
@@ -105,7 +104,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
                                   <span
                                     key={tag}
                                     className="px-2 py-0.5 rounded-full text-[10px] font-medium uppercase tracking-wide"
-                                    style={{ backgroundColor: `${color}15`, color }}
+                                    style={{ backgroundColor: '#D1E8D1', color: '#1B4332' }}
                                   >
                                     {tag}
                                   </span>

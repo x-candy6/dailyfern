@@ -8,6 +8,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-geist-mono)', 'monospace'],
+        lora: ['Lora', 'Georgia', 'serif'],
       },
       colors: {
         green: {
@@ -21,6 +22,22 @@ const config: Config = {
           700: '#15803d',
           800: '#166534',
           900: '#14532d',
+        },
+        forest: {
+          deep: '#1B4332',
+          mid: '#2D6A4F',
+          light: '#40916C',
+          sage: '#74C69D',
+          border: '#C8DFC8',
+        },
+        cream: {
+          DEFAULT: '#F9F5EC',
+          dark: '#EDE8DB',
+          card: '#FDFAF3',
+        },
+        amber: {
+          DEFAULT: '#D97706',
+          light: '#FDE68A',
         },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

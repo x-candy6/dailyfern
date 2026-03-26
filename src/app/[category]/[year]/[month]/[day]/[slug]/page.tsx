@@ -7,7 +7,7 @@ import { siteConfig } from '@/lib/config';
 export const revalidate = 300;
 
 function getCategoryColor(_category: string): string {
-  return '#16a34a';
+  return '#2D6A4F';
 }
 
 const categoryToVariant: Record<string, 1 | 2 | 3 | 4 | 5 | 6> = {
@@ -33,9 +33,9 @@ export default async function ArticlePage({
 
   if (!article || article.category !== categorySlug) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-zinc-50">
+      <div className="min-h-screen flex items-center justify-center bg-[#F9F5EC]">
         <div className="text-center">
-          <h1 className="font-display font-black text-4xl mb-4">Article Not Found</h1>
+          <h1 className="text-4xl mb-4" style={{ fontFamily: 'var(--font-lora)', fontWeight: 700 }}>Article Not Found</h1>
           <Link href="/" className="link-accent">Back to home</Link>
         </div>
       </div>
@@ -55,7 +55,7 @@ export default async function ArticlePage({
   return (
     <>
       <div className="w-full h-1" style={{ backgroundColor: accentColor }} />
-      <section className="relative min-h-[50vh] flex flex-col justify-center overflow-hidden bg-zinc-50">
+      <section className="relative min-h-[50vh] flex flex-col justify-center overflow-hidden bg-[#F9F5EC]">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
           <div className="w-[80vmin] h-[80vmin]">
             <BlossomSVG variant={blossomVariant} />
@@ -86,7 +86,7 @@ export default async function ArticlePage({
               </span>
             </div>
 
-            <h1 className="font-display font-black text-4xl lg:text-5xl leading-tight mb-6">
+            <h1 className="text-4xl lg:text-5xl leading-tight mb-6" style={{ fontFamily: 'var(--font-lora)', fontWeight: 700 }}>
               {article.title}
             </h1>
             <p className="excerpt text-lg lg:text-xl">{article.excerpt}</p>
@@ -102,7 +102,7 @@ export default async function ArticlePage({
         </div>
       </section>
 
-      <section className="py-12 lg:py-16 bg-zinc-50">
+      <section className="py-12 lg:py-16 bg-[#F9F5EC]">
         <div className="px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-3 gap-10">
@@ -112,7 +112,7 @@ export default async function ArticlePage({
 
                   {article.author && (
                     <div className="flex items-center gap-4 mb-8 pb-8 border-b border-black/5">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#16a34a] to-[#15803d] flex items-center justify-center text-white font-bold">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#2D6A4F] to-[#1B4332] flex items-center justify-center text-white font-bold">
                         {article.author.charAt(0)}
                       </div>
                       <div>
@@ -127,12 +127,12 @@ export default async function ArticlePage({
                   <div className="mt-12 pt-8 border-t border-black/5">
                     <p className="category-label mb-4">Share this story</p>
                     <div className="flex gap-3">
-                      <button className="p-3 rounded-full bg-black/5 hover:bg-[#16a34a] hover:text-white transition-colors">
+                      <button className="p-3 rounded-full bg-black/5 hover:bg-[#2D6A4F] hover:text-white transition-colors">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
                         </svg>
                       </button>
-                      <button className="p-3 rounded-full bg-black/5 hover:bg-[#16a34a] hover:text-white transition-colors">
+                      <button className="p-3 rounded-full bg-black/5 hover:bg-[#2D6A4F] hover:text-white transition-colors">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
                           <polyline points="16 6 12 2 8 6" />
@@ -153,13 +153,13 @@ export default async function ArticlePage({
                         <Link key={relatedArticle.id} href={href} className="related-article group block">
                           <article className="flex gap-4 items-start">
                             <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
-                              <div className="absolute inset-0 bg-gradient-to-br from-[#16a34a]/20 to-[#15803d]/20" />
+                              <div className="absolute inset-0 bg-gradient-to-br from-[#2D6A4F]/20 to-[#1B4332]/20" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <span className="text-xs font-medium text-[#16a34a] mb-1 block">
+                              <span className="text-xs font-medium text-[#2D6A4F] mb-1 block">
                                 {matchType === 'subcategory' ? 'Same topic' : matchType === 'category' ? 'Same category' : 'Related'}
                               </span>
-                              <h4 className="font-display font-bold text-sm leading-tight line-clamp-2 group-hover:text-[#16a34a] transition-colors">
+                              <h4 className="font-display font-bold text-sm leading-tight line-clamp-2 group-hover:text-[#2D6A4F] transition-colors">
                                 {relatedArticle.title}
                               </h4>
                               <span className="meta-text mt-1 block">
@@ -199,13 +199,13 @@ export default async function ArticlePage({
       </section>
 
       {related[0] && (
-        <section className="py-12 lg:py-16 bg-zinc-50 border-t border-black/5">
+        <section className="py-12 lg:py-16 bg-[#F9F5EC] border-t border-black/5">
           <div className="px-6 lg:px-12">
             <div className="max-w-7xl mx-auto">
               <p className="category-label mb-4">Next story</p>
               <Link href={related[0].href} className="group block">
                 <article className="petal-panel p-8">
-                  <h2 className="font-display font-black text-2xl lg:text-3xl group-hover:text-[#16a34a] transition-colors">
+                  <h2 className="text-2xl lg:text-3xl group-hover:text-[#2D6A4F] transition-colors" style={{ fontFamily: 'var(--font-lora)', fontWeight: 700 }}>
                     {related[0].article.title}
                   </h2>
                   <p className="excerpt mt-3">{related[0].article.excerpt}</p>

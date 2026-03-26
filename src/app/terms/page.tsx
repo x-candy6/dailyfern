@@ -3,10 +3,10 @@ export const revalidate = 300;
 /** Terms of service page. */
 export default function TermsPage() {
   return (
-    <section className="py-20 bg-zinc-50">
+    <section className="py-20 bg-[#F9F5EC]">
       <div className="px-6 lg:px-12">
         <div className="max-w-3xl mx-auto">
-          <h1 className="font-display font-black text-4xl mb-8">Terms of Service</h1>
+          <h1 className="mb-8" style={{ fontFamily: 'var(--font-lora)', fontStyle: 'italic', fontWeight: 700, fontSize: 'clamp(2.5rem, 6vw, 5rem)', letterSpacing: '-0.02em', lineHeight: 1.05, color: '#1A2B1A' }}>Terms of Service</h1>
           <div className="petal-panel p-8 lg:p-12 prose prose-lg">
             <p>Last updated: March 2026</p>
             <p>By using Daily Fern, you agree to these terms. Our content is for informational purposes only.</p>
