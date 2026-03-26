@@ -7,15 +7,15 @@ import { siteConfig } from '@/lib/config';
 export const revalidate = 300;
 
 const CATEGORY_COLORS: Record<string, string> = {
-  technology: '#2EE9FF',
-  business: '#FF6A00',
-  culture: '#FF2D8F',
-  earth: '#39FF14',
-  health: '#A02EFF',
-  news: '#FF2D8F',
-  sport: '#2EE9FF',
-  arts: '#D0FF00',
-  travel: '#39FF14',
+  technology: '#16a34a',
+  business: '#15803d',
+  culture: '#166534',
+  earth: '#22c55e',
+  health: '#14532d',
+  news: '#16a34a',
+  sport: '#4ade80',
+  arts: '#86efac',
+  travel: '#bbf7d0',
 };
 
 /** Homepage with hero, category sections, latest stories, and newsletter CTA. */
@@ -32,17 +32,17 @@ export default async function HomePage() {
   const healthArticles = articleCards.filter(a => a.article.category === 'health').slice(0, 3);
 
   const categorySections = [
-    { label: 'Tech', slug: 'technology', kicker: 'Trending', articles: techArticles, color: '#2EE9FF' },
-    { label: 'Business', slug: 'business', kicker: 'Analysis', articles: businessArticles, color: '#FF6A00' },
-    { label: 'Culture', slug: 'culture', kicker: 'Spotlight', articles: cultureArticles, color: '#FF2D8F' },
-    { label: 'Earth', slug: 'earth', kicker: 'Field Notes', articles: earthArticles, color: '#39FF14' },
-    { label: 'Health', slug: 'health', kicker: 'Discovery', articles: healthArticles, color: '#A02EFF' },
+    { label: 'Tech', slug: 'technology', kicker: 'Trending', articles: techArticles, color: '#16a34a' },
+    { label: 'Business', slug: 'business', kicker: 'Analysis', articles: businessArticles, color: '#15803d' },
+    { label: 'Culture', slug: 'culture', kicker: 'Spotlight', articles: cultureArticles, color: '#166534' },
+    { label: 'Earth', slug: 'earth', kicker: 'Field Notes', articles: earthArticles, color: '#22c55e' },
+    { label: 'Health', slug: 'health', kicker: 'Discovery', articles: healthArticles, color: '#14532d' },
   ];
 
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#F6F7FB]">
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-zinc-50">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-[140vmin] h-[140vmin] -translate-y-8">
             <BlossomSVG variant={1} />
@@ -51,7 +51,7 @@ export default async function HomePage() {
 
         <div className="relative z-10 px-6 lg:px-12 py-12 lg:py-20">
           <div className="max-w-7xl mx-auto">
-            <h1 className="hero-headline text-[#0B0C10] mb-8 lg:mb-12">
+            <h1 className="hero-headline text-[#171717] mb-8 lg:mb-12">
               Daily Fern
             </h1>
 
@@ -59,9 +59,9 @@ export default async function HomePage() {
               {featured && (
                 <div className="lg:col-span-2">
                   <Link href={featured.href} className="group block">
-                    <article className="petal-panel p-8 lg:p-10 border-l-4 border-[#FF2D8F]">
+                    <article className="petal-panel p-8 lg:p-10 border-l-4 border-[#16a34a]">
                       <span className="kicker block mb-4">Featured</span>
-                      <h2 className="font-display font-black text-4xl lg:text-6xl leading-[1.05] mb-6 group-hover:text-[#FF2D8F] transition-colors">
+                      <h2 className="font-display font-black text-4xl lg:text-6xl leading-[1.05] mb-6 group-hover:text-[#16a34a] transition-colors">
                         {featured.article.title}
                       </h2>
                       <p className="excerpt mb-6 max-w-2xl">{featured.article.excerpt}</p>
@@ -92,7 +92,7 @@ export default async function HomePage() {
                   <Link key={article.article.id} href={article.href} className="group block">
                     <article className="petal-panel p-4">
                       <span className="category-label block mb-2">{article.article.category}</span>
-                      <h3 className="font-display font-bold text-base leading-tight group-hover:text-[#FF2D8F] transition-colors line-clamp-2">
+                      <h3 className="font-display font-bold text-base leading-tight group-hover:text-[#16a34a] transition-colors line-clamp-2">
                         {article.article.title}
                       </h3>
                       <span className="meta-text mt-2 block">{article.formattedDate}</span>
@@ -107,7 +107,7 @@ export default async function HomePage() {
 
       {/* Category Sections */}
       {categorySections.map((section, idx) => (
-        <section key={section.slug} className={idx % 2 === 0 ? 'bg-white' : 'bg-[#F6F7FB]'}>
+        <section key={section.slug} className={idx % 2 === 0 ? 'bg-white' : 'bg-zinc-50'}>
           <div className="h-[3px]" style={{ background: `linear-gradient(90deg, ${section.color}, transparent 60%)` }} />
 
           <div className="px-6 lg:px-12 py-16 lg:py-24">
@@ -132,7 +132,7 @@ export default async function HomePage() {
                     <Link href={section.articles[0].href} className="group block">
                       <article className="petal-panel p-8 h-full border-l-4" style={{ borderColor: section.color }}>
                         <span className="kicker block mb-3">{section.kicker}</span>
-                        <h3 className="font-display font-black text-2xl lg:text-4xl leading-tight mb-4 group-hover:text-[#FF2D8F] transition-colors">
+                        <h3 className="font-display font-black text-2xl lg:text-4xl leading-tight mb-4 group-hover:text-[#16a34a] transition-colors">
                           {section.articles[0].article.title}
                         </h3>
                         <p className="excerpt mb-6 max-w-xl">{section.articles[0].article.excerpt}</p>
@@ -154,7 +154,7 @@ export default async function HomePage() {
                     {section.articles.slice(1).map((article) => (
                       <Link key={article.article.id} href={article.href} className="group block">
                         <article className="petal-panel p-4">
-                          <h4 className="font-display font-bold text-base leading-tight group-hover:text-[#FF2D8F] transition-colors line-clamp-2">
+                          <h4 className="font-display font-bold text-base leading-tight group-hover:text-[#16a34a] transition-colors line-clamp-2">
                             {article.article.title}
                           </h4>
                           <span className="meta-text mt-2 block">{article.formattedDate}</span>
@@ -171,7 +171,7 @@ export default async function HomePage() {
 
       {/* Latest Stories */}
       <section className="bg-white">
-        <div className="h-[3px]" style={{ background: 'linear-gradient(90deg, #FF2D8F, transparent 40%)' }} />
+        <div className="h-[3px]" style={{ background: 'linear-gradient(90deg, #16a34a, transparent 40%)' }} />
         <div className="px-6 lg:px-12 py-16 lg:py-24">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between mb-10">
@@ -187,14 +187,14 @@ export default async function HomePage() {
 
             <div className="grid md:grid-cols-2 gap-6">
               {articleCards.slice(3, 9).map((article) => {
-                const catColor = CATEGORY_COLORS[article.article.category] ?? '#FF2D8F';
+                const catColor = CATEGORY_COLORS[article.article.category] ?? '#16a34a';
                 return (
                   <Link key={article.article.id} href={article.href} className="group block article-card">
                     <article className="petal-panel p-5 border-l-4" style={{ borderColor: catColor }}>
                       <span className="category-label block mb-1" style={{ color: catColor }}>
                         {article.article.category}
                       </span>
-                      <h4 className="font-display font-bold text-base leading-tight line-clamp-2 group-hover:text-[#FF2D8F] transition-colors">
+                      <h4 className="font-display font-bold text-base leading-tight line-clamp-2 group-hover:text-[#16a34a] transition-colors">
                         {article.article.title}
                       </h4>
                       <div className="flex items-center gap-3 mt-2">
@@ -217,8 +217,8 @@ export default async function HomePage() {
       </section>
 
       {/* Browse by Topic */}
-      <section className="bg-[#F6F7FB]">
-        <div className="h-[3px]" style={{ background: 'linear-gradient(90deg, #2EE9FF, #FF2D8F, transparent 60%)' }} />
+      <section className="bg-zinc-50">
+        <div className="h-[3px]" style={{ background: 'linear-gradient(90deg, #16a34a, #22c55e, transparent 60%)' }} />
         <div className="px-6 lg:px-12 py-16 lg:py-24">
           <div className="max-w-7xl mx-auto">
             <h2 className="font-display font-black text-2xl lg:text-3xl uppercase tracking-tight mb-10">
@@ -226,11 +226,11 @@ export default async function HomePage() {
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {siteConfig.categories.map((category) => {
-                const catColor = CATEGORY_COLORS[category.slug] ?? '#FF2D8F';
+                const catColor = CATEGORY_COLORS[category.slug] ?? '#16a34a';
                 return (
                   <Link key={category.slug} href={`/${category.slug}`} className="group block">
                     <div className="petal-panel p-6 border-l-4 transition-shadow hover:shadow-xl" style={{ borderColor: catColor }}>
-                      <h3 className="font-display font-bold text-xl group-hover:text-[#FF2D8F] transition-colors">
+                      <h3 className="font-display font-bold text-xl group-hover:text-[#16a34a] transition-colors">
                         {category.label}
                       </h3>
                       <span className="meta-text mt-2 block">
@@ -247,10 +247,10 @@ export default async function HomePage() {
 
       {/* Newsletter CTA */}
       <section className="bg-white">
-        <div className="h-[3px]" style={{ background: 'linear-gradient(90deg, #D0FF00, transparent 40%)' }} />
+        <div className="h-[3px]" style={{ background: 'linear-gradient(90deg, #16a34a, transparent 40%)' }} />
         <div className="px-6 lg:px-12 py-16 lg:py-24">
           <div className="max-w-7xl mx-auto">
-            <div className="petal-panel p-8 lg:p-10 border-t-4 border-[#FF2D8F] max-w-xl">
+            <div className="petal-panel p-8 lg:p-10 border-t-4 border-[#16a34a] max-w-xl">
               <h2 className="font-display font-black text-2xl lg:text-3xl mb-4">
                 Get the daily brief
               </h2>
@@ -267,7 +267,7 @@ export default async function HomePage() {
       </section>
 
       {/* Contact CTA */}
-      <section className="py-20 lg:py-32 bg-[#0B0C10] text-white">
+      <section className="py-20 lg:py-32 bg-zinc-900 text-white">
         <div className="px-6 lg:px-12">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-display font-black text-3xl lg:text-5xl mb-6">

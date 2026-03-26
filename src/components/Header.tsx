@@ -11,9 +11,9 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#F6F7FB]/90 backdrop-blur-sm">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm">
         <div className="flex items-center justify-between px-6 lg:px-12 py-4">
-          <Link href="/" className="font-display font-black text-xl tracking-tight text-[#0B0C10]">
+          <Link href="/" className="font-display font-black text-xl tracking-tight text-[#171717]">
             Daily Fern
           </Link>
 

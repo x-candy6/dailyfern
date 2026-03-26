@@ -3,7 +3,7 @@ export const revalidate = 300;
 /** Terms of service page. */
 export default function TermsPage() {
   return (
-    <section className="py-20 bg-[#F6F7FB]">
+    <section className="py-20 bg-zinc-50">
       <div className="px-6 lg:px-12">
         <div className="max-w-3xl mx-auto">
           <h1 className="font-display font-black text-4xl mb-8">Terms of Service</h1>

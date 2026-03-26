@@ -6,7 +6,7 @@ export default function Footer() {
   const mainCategories = siteConfig.categories.slice(0, 6);
 
   return (
-    <footer className="bg-[#0B0C10] text-white py-16 lg:py-20">
+    <footer className="bg-zinc-900 text-white py-16 lg:py-20">
       <div className="px-6 lg:px-12">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">

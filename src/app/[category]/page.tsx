@@ -5,13 +5,8 @@ import { siteConfig } from '@/lib/config';
 
 export const revalidate = 300;
 
-function getCategoryColor(category: string): string {
-  const colors: Record<string, string> = {
-    technology: '#2EE9FF', business: '#FF6A00', culture: '#FF2D8F',
-    earth: '#39FF14', health: '#A02EFF', news: '#FF2D8F',
-    sport: '#2EE9FF', arts: '#D0FF00', travel: '#39FF14',
-  };
-  return colors[category] ?? '#FF2D8F';
+function getCategoryColor(_category: string): string {
+  return '#16a34a';
 }
 
 export async function generateStaticParams() {
@@ -25,7 +20,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
   if (!category) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F6F7FB]">
+      <div className="min-h-screen flex items-center justify-center bg-zinc-50">
         <div className="text-center">
           <h1 className="font-display font-black text-4xl mb-4">Category Not Found</h1>
           <Link href="/" className="link-accent">Back to home</Link>
@@ -62,7 +57,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
       </section>
 
       {subCategories.length > 0 && (
-        <section className="py-6 bg-[#F6F7FB] border-b border-black/5">
+        <section className="py-6 bg-zinc-50 border-b border-black/5">
           <div className="px-6 lg:px-12">
             <div className="max-w-7xl mx-auto">
               <div className="flex flex-wrap gap-2">
@@ -76,7 +71,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         </section>
       )}
 
-      <section className="py-12 lg:py-16 bg-[#F6F7FB]">
+      <section className="py-12 lg:py-16 bg-zinc-50">
         <div className="px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             {articleCards.length > 0 ? (
@@ -89,7 +84,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
                     >
                       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3">
                         <div className="flex-1 min-w-0">
-                          <h2 className="font-display font-bold text-lg lg:text-xl leading-tight mb-2 group-hover:text-[#0B0C10]/70 transition-colors">
+                          <h2 className="font-display font-bold text-lg lg:text-xl leading-tight mb-2 group-hover:text-[#16a34a] transition-colors">
                             {card.article.title}
                           </h2>
                           <p className="text-[#6B7280] text-sm leading-relaxed mb-3 line-clamp-2">
