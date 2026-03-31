@@ -26,7 +26,7 @@ export default async function ArticlePage({
 
   const [article, allArticles] = await Promise.all([
     contentClient.getArticle(slug),
-    contentClient.getArticles({ limit: 50 }),
+    contentClient.getArticlesByCategory(categorySlug, { limit: 20 }),
   ]);
 
   const category = siteConfig.categories.find(c => c.slug === article?.category);
