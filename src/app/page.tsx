@@ -21,7 +21,14 @@ const CATEGORY_COLORS: Record<string, string> = {
 
 /** Homepage with hero, category sections, latest stories, and newsletter CTA. */
 export default async function HomePage() {
-  const articles = await contentClient.getArticles({ limit: 20 });
+  const [articles, categoryCounts] = await Promise.all([
+    contentClient.getArticles({ limit: 20 }),
+    Promise.all(
+      siteConfig.categories.map(async (c) =>
+        [c.slug, await contentClient.countArticlesByCategory(c.slug)] as const
+      )
+    ).then((entries) => Object.fromEntries(entries) as Record<string, number>),
+  ]);
   const articleCards = articles.map(prepareArticleCard);
   const [featured, ...rest] = articleCards;
   const miniArticles = rest.slice(0, 3);
@@ -266,7 +273,7 @@ export default async function HomePage() {
                       {category.label}
                     </h3>
                     <span className="meta-text mt-2 block">
-                      {articles.filter(a => a.category === category.slug).length} articles
+                      {categoryCounts[category.slug] ?? 0} articles
                     </span>
                   </div>
                 </Link>

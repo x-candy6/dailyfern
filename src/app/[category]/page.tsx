@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { contentClient } from '@/lib/content';
-import { prepareArticleCard } from '@stackmatix/cms-core';
+import { prepareArticleCard, paginateArticles } from '@stackmatix/cms-core';
 import { siteConfig } from '@/lib/config';
 
 export const revalidate = 300;
@@ -13,8 +13,16 @@ export async function generateStaticParams() {
   return siteConfig.categories.map((c) => ({ category: c.slug }));
 }
 
+const PAGE_SIZE = 20;
+
 /** Category listing page. */
-export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
+export default async function CategoryPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ category: string }>;
+  searchParams: Promise<{ page?: string }>;
+}) {
   const { category: categorySlug } = await params;
   const category = siteConfig.categories.find(c => c.slug === categorySlug);
 
@@ -29,8 +37,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
     );
   }
 
-  const articles = await contentClient.getArticlesByCategory(categorySlug);
-  const articleCards = articles.map(prepareArticleCard);
+  const { page = '1' } = await searchParams;
+  const allArticles = await contentClient.getArticlesByCategory(categorySlug);
+  const { items: pageArticles, currentPage, totalPages } = paginateArticles(
+    allArticles,
+    parseInt(page, 10) || 1,
+    PAGE_SIZE,
+  );
+  const articleCards = pageArticles.map(prepareArticleCard);
   const color = getCategoryColor(categorySlug);
   const fullCategory = await contentClient.getCategory(categorySlug);
   const subCategories = fullCategory?.subCategories ?? [];
@@ -75,49 +89,72 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         <div className="px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             {articleCards.length > 0 ? (
-              <div className="flex flex-col gap-4">
-                {articleCards.map((card) => (
-                  <Link key={card.article.id} href={card.href} className="group block">
-                    <article
-                      className="bg-[#FDFAF3] border border-[#C8DFC8] border-t-2 border-t-[#2D6A4F] p-5 lg:p-6 transition-all hover:border-t-[#1B4332]"
-                    >
-                      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3">
-                        <div className="flex-1 min-w-0">
-                          <h2 className="text-lg lg:text-xl leading-tight mb-2 group-hover:text-[#2D6A4F] transition-colors" style={{ fontFamily: 'var(--font-lora)', fontWeight: 600 }}>
-                            {card.article.title}
-                          </h2>
-                          <p className="text-[#6B7280] text-sm leading-relaxed mb-3 line-clamp-2">
-                            {card.article.excerpt}
-                          </p>
-                          <div className="flex flex-wrap items-center gap-3 text-xs text-[#9CA3AF]">
-                            <span>{card.formattedDate}</span>
-                            <span className="flex items-center gap-1">
-                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <circle cx="12" cy="12" r="10" />
-                                <polyline points="12 6 12 12 16 14" />
-                              </svg>
-                              {card.article.readingTime} min
-                            </span>
-                            {card.article.tags && card.article.tags.length > 0 && (
-                              <div className="flex gap-1.5">
-                                {card.article.tags.slice(0, 3).map((tag: string) => (
-                                  <span
-                                    key={tag}
-                                    className="px-2 py-0.5 rounded-full text-[10px] font-medium uppercase tracking-wide"
-                                    style={{ backgroundColor: '#D1E8D1', color: '#1B4332' }}
-                                  >
-                                    {tag}
-                                  </span>
-                                ))}
-                              </div>
-                            )}
+              <>
+                <div className="flex flex-col gap-4">
+                  {articleCards.map((card) => (
+                    <Link key={card.article.id} href={card.href} className="group block">
+                      <article
+                        className="bg-[#FDFAF3] border border-[#C8DFC8] border-t-2 border-t-[#2D6A4F] p-5 lg:p-6 transition-all hover:border-t-[#1B4332]"
+                      >
+                        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3">
+                          <div className="flex-1 min-w-0">
+                            <h2 className="text-lg lg:text-xl leading-tight mb-2 group-hover:text-[#2D6A4F] transition-colors" style={{ fontFamily: 'var(--font-lora)', fontWeight: 600 }}>
+                              {card.article.title}
+                            </h2>
+                            <p className="text-[#6B7280] text-sm leading-relaxed mb-3 line-clamp-2">
+                              {card.article.excerpt}
+                            </p>
+                            <div className="flex flex-wrap items-center gap-3 text-xs text-[#9CA3AF]">
+                              <span>{card.formattedDate}</span>
+                              <span className="flex items-center gap-1">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                  <circle cx="12" cy="12" r="10" />
+                                  <polyline points="12 6 12 12 16 14" />
+                                </svg>
+                                {card.article.readingTime} min
+                              </span>
+                              {card.article.tags && card.article.tags.length > 0 && (
+                                <div className="flex gap-1.5">
+                                  {card.article.tags.slice(0, 3).map((tag: string) => (
+                                    <span
+                                      key={tag}
+                                      className="px-2 py-0.5 rounded-full text-[10px] font-medium uppercase tracking-wide"
+                                      style={{ backgroundColor: '#D1E8D1', color: '#1B4332' }}
+                                    >
+                                      {tag}
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </article>
-                  </Link>
-                ))}
-              </div>
+                      </article>
+                    </Link>
+                  ))}
+                </div>
+                {totalPages > 1 && (
+                  <div className="flex items-center justify-between mt-8 pt-6 border-t border-[#C8DFC8]">
+                    {currentPage > 1 ? (
+                      <Link
+                        href={`/${categorySlug}?page=${currentPage - 1}`}
+                        className="link-accent"
+                      >
+                        Previous
+                      </Link>
+                    ) : <span />}
+                    <span className="text-sm text-[#6B7280]">Page {currentPage} of {totalPages}</span>
+                    {currentPage < totalPages ? (
+                      <Link
+                        href={`/${categorySlug}?page=${currentPage + 1}`}
+                        className="link-accent"
+                      >
+                        Next
+                      </Link>
+                    ) : <span />}
+                  </div>
+                )}
+              </>
             ) : (
               <div className="text-center py-20">
                 <p className="text-[#6B7280] text-lg">No articles found in this category yet.</p>

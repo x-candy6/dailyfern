@@ -48,6 +48,9 @@ export const contentClient = {
   getCategory: async (slug: string): Promise<Category | null> => {
     try { return await client.getCategory(slug); } catch (e) { logError('getCategory', e); return null; }
   },
+  countArticlesByCategory: async (category: string): Promise<number> => {
+    try { return await client.countArticlesByCategory(category); } catch (e) { logError('countArticlesByCategory', e); return 0; }
+  },
   invalidateCache: (slug?: string) => client.invalidateCache(slug),
   clearCache: () => client.clearCache(),
 };
