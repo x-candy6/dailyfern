@@ -21,23 +21,28 @@ const CATEGORY_COLORS: Record<string, string> = {
 
 /** Homepage with hero, category sections, latest stories, and newsletter CTA. */
 export default async function HomePage() {
-  const [articles, categoryCounts] = await Promise.all([
+  const [articles, categoryCounts, techRaw, businessRaw, cultureRaw, earthRaw, healthRaw] = await Promise.all([
     contentClient.getArticles({ limit: 20 }),
     Promise.all(
       siteConfig.categories.map(async (c) =>
         [c.slug, await contentClient.countArticlesByCategory(c.slug)] as const
       )
     ).then((entries) => Object.fromEntries(entries) as Record<string, number>),
+    contentClient.getArticlesByCategory('technology', { limit: 3 }),
+    contentClient.getArticlesByCategory('business', { limit: 3 }),
+    contentClient.getArticlesByCategory('culture', { limit: 3 }),
+    contentClient.getArticlesByCategory('earth', { limit: 3 }),
+    contentClient.getArticlesByCategory('health', { limit: 3 }),
   ]);
   const articleCards = articles.map(prepareArticleCard);
   const [featured, ...rest] = articleCards;
   const miniArticles = rest.slice(0, 3);
 
-  const techArticles = articleCards.filter(a => a.article.category === 'technology').slice(0, 3);
-  const businessArticles = articleCards.filter(a => a.article.category === 'business').slice(0, 3);
-  const cultureArticles = articleCards.filter(a => a.article.category === 'culture').slice(0, 3);
-  const earthArticles = articleCards.filter(a => a.article.category === 'earth').slice(0, 3);
-  const healthArticles = articleCards.filter(a => a.article.category === 'health').slice(0, 3);
+  const techArticles = techRaw.map(prepareArticleCard);
+  const businessArticles = businessRaw.map(prepareArticleCard);
+  const cultureArticles = cultureRaw.map(prepareArticleCard);
+  const earthArticles = earthRaw.map(prepareArticleCard);
+  const healthArticles = healthRaw.map(prepareArticleCard);
 
   const categorySections = [
     { label: 'Tech', slug: 'technology', kicker: 'Trending', articles: techArticles, color: '#16a34a' },

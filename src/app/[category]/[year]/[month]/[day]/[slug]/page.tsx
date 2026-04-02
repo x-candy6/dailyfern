@@ -151,21 +151,16 @@ export default async function ArticlePage({
                     <div className="space-y-0">
                       {related.map(({ article: relatedArticle, href, matchType }) => (
                         <Link key={relatedArticle.id} href={href} className="related-article group block">
-                          <article className="flex gap-4 items-start">
-                            <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
-                              <div className="absolute inset-0 bg-gradient-to-br from-[#2D6A4F]/20 to-[#1B4332]/20" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <span className="text-xs font-medium text-[#2D6A4F] mb-1 block">
-                                {matchType === 'subcategory' ? 'Same topic' : matchType === 'category' ? 'Same category' : 'Related'}
-                              </span>
-                              <h4 className="font-display font-bold text-sm leading-tight line-clamp-2 group-hover:text-[#2D6A4F] transition-colors">
-                                {relatedArticle.title}
-                              </h4>
-                              <span className="meta-text mt-1 block">
-                                {new Date(relatedArticle.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-                              </span>
-                            </div>
+                          <article>
+                            <span className="text-xs font-medium text-[#2D6A4F] mb-1 block">
+                              {matchType === 'subcategory' ? 'Same topic' : matchType === 'category' ? 'Same category' : 'Related'}
+                            </span>
+                            <h4 className="font-display font-bold text-sm leading-tight line-clamp-2 group-hover:text-[#2D6A4F] transition-colors">
+                              {relatedArticle.title}
+                            </h4>
+                            <span className="meta-text mt-1 block">
+                              {new Date(relatedArticle.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                            </span>
                           </article>
                         </Link>
                       ))}
