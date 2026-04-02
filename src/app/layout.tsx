@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Lora } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import AOSProvider from '@/components/AOSProvider';
 import { siteConfig } from '@/lib/config';
 import './globals.css';
 
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${lora.variable} h-full antialiased`}>
       <body>
+        <AOSProvider />
         <Header />
         <main className="pt-16">
           {children}

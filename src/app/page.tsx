@@ -55,7 +55,7 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#F9F5EC]">
+      <section data-aos="fade-up" className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#F9F5EC]">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-30">
           <div className="w-[140vmin] h-[140vmin] -translate-y-8">
             <BlossomSVG variant={1} />
@@ -129,7 +129,7 @@ export default async function HomePage() {
 
       {/* Category Sections */}
       {categorySections.map((section, idx) => (
-        <section key={section.slug} className={idx % 2 === 0 ? 'bg-[#F9F5EC]' : 'bg-[#FDFAF3]'}>
+        <section key={section.slug} data-aos="fade-up" className={idx % 2 === 0 ? 'bg-[#F9F5EC]' : 'bg-[#FDFAF3]'}>
           <div className="px-6 lg:px-12 py-16 lg:py-24">
             <div className="max-w-7xl mx-auto">
               <LeafSeparator />
@@ -200,7 +200,7 @@ export default async function HomePage() {
       ))}
 
       {/* Latest Stories */}
-      <section className="bg-[#FDFAF3]">
+      <section data-aos="fade-up" className="bg-[#FDFAF3]">
         <div className="px-6 lg:px-12 py-16 lg:py-24">
           <div className="max-w-7xl mx-auto">
             <LeafSeparator />
@@ -256,7 +256,7 @@ export default async function HomePage() {
       </section>
 
       {/* Browse by Topic */}
-      <section className="bg-[#F9F5EC]">
+      <section data-aos="fade-up" className="bg-[#F9F5EC]">
         <div className="px-6 lg:px-12 py-16 lg:py-24">
           <div className="max-w-7xl mx-auto">
             <LeafSeparator />
@@ -289,7 +289,7 @@ export default async function HomePage() {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="bg-[#1B4332] py-20 lg:py-28">
+      <section data-aos="fade-up" className="bg-[#1B4332] py-20 lg:py-28">
         <div className="px-6 lg:px-12">
           <div className="max-w-xl mx-auto">
             <h2
